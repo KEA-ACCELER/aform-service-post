@@ -2,13 +2,21 @@ package com.aform.post.domain.post_category;
 
 import java.io.Serializable;
 
+import org.springframework.stereotype.Component;
+
 import com.aform.post.BaseTimeEntity;
 import com.aform.post.domain.category.Category;
 import com.aform.post.domain.post.Post;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 
+@Entity
+@Table(name = "post_category")
+@Component
+@NoArgsConstructor (access = AccessLevel.PROTECTED)
+@AllArgsConstructor
+@Getter
 public class PostCategory extends BaseTimeEntity implements Serializable{
     
     @Id

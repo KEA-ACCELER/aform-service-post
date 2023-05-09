@@ -6,9 +6,6 @@ import org.springframework.stereotype.Component;
 
 import com.aform.post.BaseTimeEntity;
 import com.aform.post.domain.post.Post;
-import com.fasterxml.jackson.databind.JsonSerializable.Base;
-
-import jakarta.annotation.Generated;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
