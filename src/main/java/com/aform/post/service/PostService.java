@@ -1,48 +1,57 @@
 package com.aform.post.service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import com.aform.post.config.BearerAuthFeignConfig;
-import com.aform.post.config.MyRequestInterceptor;
+import com.aform.post.domain.post.Post;
 import com.aform.post.domain.post.PostRepository;
-import com.aform.post.feign.AuthenticationServiceFromUser;
-import com.aform.post.web.dto.UserDto;
-import com.aform.post.web.dto.UserDto.GetUserResponseDto;
+import com.aform.post.web.dto.PostDto;
+import com.aform.post.web.dto.PostDto.PostListResponseDto;
 
-import ch.qos.logback.classic.Logger;
-import jakarta.servlet.http.HttpServletRequest;
 import jakarta.transaction.Transactional;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
-@Slf4j
 public class PostService {
-    
     @Autowired
-    private static PostRepository postRepository;
-
-    @Autowired
-    AuthenticationServiceFromUser authenticationServiceFromUser;
+    PostRepository postRepository;
     
-
     @Transactional
-    public Optional<GetUserResponseDto> getUserInfo(HttpServletRequest request){
-        //MyRequestInterceptor myRequestInterceptor = new MyRequestInterceptor();
-        //myRequestI.setJwt(request.getHeader("authorization"));
-        // BearerAuthFeignConfig.setJwt(request.getHeader("authorization"));
-        log.info("getUserInfo : " + request.getHeader("authorization"));
-        
-        return authenticationServiceFromUser.ifUserLogin(request.getHeader("authorization"));
+    public Post createPost(PostDto.PostCreateRequestDto postCreateRequestDto, String author){
+        return postRepository.save(postCreateRequestDto.toEntity(author));
     }
 
     @Transactional
-    public String test(){
-            return authenticationServiceFromUser.test();
+    public Long deletePost(Long postPk){
+        postRepository.deleteByPostPk(postPk);
+        return postPk;
+    } 
+
+    @Transactional
+    public PostDto.PostResponseDto getOnePost(Long postPk){
+        Post post = postRepository.findByPostPk(postPk);
+        return PostDto.PostResponseDto.builder().post(post).build();
     }
+
+    @Transactional
+    public List<PostListResponseDto> get10PostList(int index){
+        Pageable pageable = PageRequest.of(index, 10);
+        Page<Post> result =postRepository.findAll(pageable); //페이징
+        return result.getContent()
+            .stream()
+            .map(post -> PostListResponseDto.builder().post(post).build())
+            .collect(Collectors.toList());
+
+
+    }
+
+
 }

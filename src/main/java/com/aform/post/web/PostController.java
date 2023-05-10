@@ -1,16 +1,22 @@
 package com.aform.post.web;
 
 import java.net.http.HttpRequest;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-import com.aform.post.config.MyRequestInterceptor;
+import com.aform.post.domain.post.Post;
+import com.aform.post.service.FeignService;
 import com.aform.post.service.PostService;
+import com.aform.post.web.dto.PostDto.PostCreateRequestDto;
+import com.aform.post.web.dto.PostDto.PostListResponseDto;
+import com.aform.post.web.dto.PostDto.PostResponseDto;
 import com.aform.post.web.dto.UserDto.GetUserResponseDto;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -20,15 +26,43 @@ import jakarta.servlet.http.HttpServletRequest;
 public class PostController {
 
     @Autowired
+    private FeignService feignService;
+
+    @Autowired
     private PostService postService;
 
     @GetMapping("/user/info")
     public ResponseEntity<Optional<GetUserResponseDto>> getUser(HttpServletRequest request){
-        return ResponseEntity.ok(postService.getUserInfo(request));
+        return ResponseEntity.ok(feignService.getUserInfo(request));
     }
 
     @GetMapping("/test")
     public ResponseEntity<String> test(HttpServletRequest request){
-        return ResponseEntity.ok(postService.test());
+        return ResponseEntity.ok(feignService.test());
     }
+
+    //--------------------post down--------------------
+
+    @PostMapping("/create")
+    public ResponseEntity<Post> createPost(HttpServletRequest request, @RequestBody PostCreateRequestDto postCreateRequestDto){
+        String userId = feignService.getUserInfo(request).get().getUserId();
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.createPost(postCreateRequestDto, userId));
+    }
+    
+    @DeleteMapping("/delete/{postPk}")
+    public ResponseEntity<String> deletePost(@PathVariable Long postPk){
+        return ResponseEntity.ok("Deleted : "+postService.deletePost(postPk));
+    }
+
+    @GetMapping("/get/{postPk}")
+    public ResponseEntity<PostResponseDto> getOnePost(@PathVariable Long postPk){
+        return ResponseEntity.ok(postService.getOnePost(postPk));
+    }
+
+    @GetMapping("/get10/{index}")
+    public ResponseEntity<List<PostListResponseDto>> get10Post(@RequestParam(value="index", defaultValue="0") int index){
+        return ResponseEntity.ok(postService.get10PostList(index));
+    }
+
+
 }
