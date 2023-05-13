@@ -59,10 +59,11 @@ public class PostController {
         return ResponseEntity.ok(postService.getOnePost(postPk));
     }
 
-    @GetMapping("/get10/{index}")
-    public ResponseEntity<List<PostListResponseDto>> get10Post(@RequestParam(value="index", defaultValue="0") int index){
-        return ResponseEntity.ok(postService.get10PostList(index));
+    @GetMapping("/getPosts/{itemNum}/{pageIndex}")
+    public ResponseEntity<List<PostListResponseDto>> get10Post(@RequestParam(value="pageIndex", defaultValue="0") int index, @RequestParam(value="itemNum", defaultValue="10") int itemNum){
+        return ResponseEntity.ok(postService.getPostList(index, itemNum));
     }
+    
 
 
 }

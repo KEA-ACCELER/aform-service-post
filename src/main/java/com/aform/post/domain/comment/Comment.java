@@ -42,11 +42,11 @@ public class Comment extends BaseTimeEntity implements Serializable{
     private Post commentPost;
 
     @Column(name = "comment_like")
-    private Long commentLike;
+    private int commentLike;
 
 
     @Builder
-    public Comment(String commentAuthor, String commentContent, Post commentPost, Long commentLike) {
+    public Comment(String commentAuthor, String commentContent, Post commentPost, int commentLike) {
         this.commentAuthor = commentAuthor;
         this.commentContent = commentContent;
         this.commentPost = commentPost;

@@ -42,8 +42,8 @@ public class PostService {
     }
 
     @Transactional
-    public List<PostListResponseDto> get10PostList(int index){
-        Pageable pageable = PageRequest.of(index, 10);
+    public List<PostListResponseDto> getPostList(int index, int itemNum){
+        Pageable pageable = PageRequest.of(index, itemNum);
         Page<Post> result =postRepository.findAll(pageable); //페이징
         return result.getContent()
             .stream()
