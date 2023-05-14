@@ -25,7 +25,7 @@ public class CommentLikeService {
     public CommentLike createCommentLike(CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
         
         //해당 댓글에 좋아요를 누른 유저인지 확인
-        if (!commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), commentLikeCreateRequestDto.getCommentLikeComment()).isPresent()) {
+        if (commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), commentLikeCreateRequestDto.getCommentLikeComment()).isPresent()) {
             log.info("이미 좋아요를 누른 유저입니다.");
             return null;
         }
