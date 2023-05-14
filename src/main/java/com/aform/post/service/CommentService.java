@@ -54,4 +54,11 @@ public class CommentService {
         commentRepository.deleteByCommentPk(commentPk);
         return commentPk;
     }
+
+    @Transactional
+    public Comment updateCommentLikeCount(Long commentPk){
+        Comment comment = commentRepository.findByCommentPk(commentPk);
+        comment.setCommentLike(comment.getCommentLike()+1);
+        return commentRepository.save(comment);
+    }
 }

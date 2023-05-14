@@ -30,7 +30,7 @@ public class Post extends BaseTimeEntity implements Serializable{
     private Long postPk;
 
     @Column(name = "post_author")
-    private String postAuthor; // 설문 등록자
+    private Long postAuthor; // 설문 등록자
 
     @Column(name = "post_title", length = 100)
     private String postTitle;
@@ -45,7 +45,7 @@ public class Post extends BaseTimeEntity implements Serializable{
     private int postViews;
 
     @Builder
-    public Post(String postAuthor, String postTitle, String postDesc, Long postSurvey, int postViews){
+    public Post(Long postAuthor, String postTitle, String postDesc, Long postSurvey, int postViews){
         this.postAuthor = postAuthor;
         this.postTitle = postTitle;
         this.postDesc = postDesc;

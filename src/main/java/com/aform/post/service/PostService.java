@@ -25,8 +25,8 @@ public class PostService {
     PostRepository postRepository;
     
     @Transactional
-    public Post createPost(PostDto.PostCreateRequestDto postCreateRequestDto, String author){
-        return postRepository.save(postCreateRequestDto.toEntity(author));
+    public Post createPost(PostDto.PostCreateRequestDto postCreateRequestDto ){
+        return postRepository.save(postCreateRequestDto.toEntity());
     }
 
     @Transactional

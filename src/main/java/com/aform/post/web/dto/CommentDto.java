@@ -16,7 +16,7 @@ public class CommentDto {
     @RequiredArgsConstructor
     public static class CommentCreateRequestDto {
     
-        private String commentAuthor;
+        private Long commentAuthor;
         private String commentContent;
         private Long commentPost;
     
@@ -35,7 +35,7 @@ public class CommentDto {
     public static class GetCommentResponseDto {
     
         private Long commentPk;
-        private String commentAuthor;
+        private Long commentAuthor;
         private String commentContent;
         private int commentLike;
         private LocalDateTime createdDate;

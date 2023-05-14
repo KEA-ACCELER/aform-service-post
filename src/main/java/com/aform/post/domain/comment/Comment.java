@@ -17,6 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Component
@@ -32,7 +33,7 @@ public class Comment extends BaseTimeEntity implements Serializable{
     private Long commentPk;
 
     @Column(name = "comment_author")
-    private String commentAuthor;
+    private Long commentAuthor;
 
     @Column(name = "comment_content", length = 500)
     private String commentContent;
@@ -41,12 +42,13 @@ public class Comment extends BaseTimeEntity implements Serializable{
     @JoinColumn(name = "comment_post")
     private Post commentPost;
 
+    @Setter
     @Column(name = "comment_like")
     private int commentLike;
 
 
     @Builder
-    public Comment(String commentAuthor, String commentContent, Post commentPost, int commentLike) {
+    public Comment(Long commentAuthor, String commentContent, Post commentPost, int commentLike) {
         this.commentAuthor = commentAuthor;
         this.commentContent = commentContent;
         this.commentPost = commentPost;

@@ -45,8 +45,8 @@ public class PostController {
 
     @PostMapping("/create")
     public ResponseEntity<Post> createPost(HttpServletRequest request, @RequestBody PostCreateRequestDto postCreateRequestDto){
-        String userId = feignService.getUserInfo(request).get().getUserId();
-        return ResponseEntity.status(HttpStatus.CREATED).body(postService.createPost(postCreateRequestDto, userId));
+        //String userId = feignService.getUserInfo(request).get().getUserId();
+        return ResponseEntity.status(HttpStatus.CREATED).body(postService.createPost(postCreateRequestDto));
     }
     
     @DeleteMapping("/delete/{postPk}")

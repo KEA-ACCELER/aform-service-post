@@ -13,8 +13,9 @@ public class PostDto {
         String postTitle;
         String postDesc;
         Long postSurvey;
+        Long author;
     
-        public Post toEntity(String author){
+        public Post toEntity(){
             return Post.builder()
                 .postTitle(postTitle)
                 .postDesc(postDesc)
