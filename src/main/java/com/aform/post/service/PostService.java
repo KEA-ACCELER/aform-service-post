@@ -8,21 +8,29 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.aform.post.domain.post.Post;
 import com.aform.post.domain.post.PostRepository;
+import com.aform.post.feign.GetSurveys;
 import com.aform.post.web.dto.PostDto;
 import com.aform.post.web.dto.PostDto.PostListResponseDto;
+import com.aform.post.web.dto.SurveyDto.GetOneSurvey;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostService {
     @Autowired
     PostRepository postRepository;
+
+    @Autowired
+    GetSurveys getSurveys;
     
     @Transactional
     public Post createPost(PostDto.PostCreateRequestDto postCreateRequestDto ){
@@ -52,6 +60,11 @@ public class PostService {
 
 
     }
-
+//---------------------------------
+    @Transactional
+    public ResponseEntity<Object> getSurvey(String surveyId){
+        if (surveyId == null) return ResponseEntity.badRequest().build();
+        return getSurveys.getSurvey(surveyId);
+    }
 
 }

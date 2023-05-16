@@ -8,19 +8,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scripting.groovy.GroovyObjectCustomizer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import com.aform.post.domain.post.Post;
 import com.aform.post.service.FeignService;
 import com.aform.post.service.PostService;
+import com.aform.post.web.dto.SurveyDto;
 import com.aform.post.web.dto.PostDto.PostCreateRequestDto;
 import com.aform.post.web.dto.PostDto.PostListResponseDto;
 import com.aform.post.web.dto.PostDto.PostResponseDto;
+import com.aform.post.web.dto.SurveyDto.GetOneSurvey;
 import com.aform.post.web.dto.UserDto.GetUserResponseDto;
 
-import jakarta.servlet.http.HttpServletRequest;
 
+import jakarta.servlet.http.HttpServletRequest;
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Controller
 @RequestMapping("/app/post")
 public class PostController {
@@ -50,20 +56,26 @@ public class PostController {
     }
     
     @DeleteMapping("/delete/{postPk}")
-    public ResponseEntity<String> deletePost(@PathVariable Long postPk){
+    public ResponseEntity<String> deletePost(@PathVariable("postPk") Long postPk){
         return ResponseEntity.ok("Deleted : "+postService.deletePost(postPk));
     }
 
     @GetMapping("/get/{postPk}")
-    public ResponseEntity<PostResponseDto> getOnePost(@PathVariable Long postPk){
+    public ResponseEntity<PostResponseDto> getOnePost(@PathVariable("postPk") Long postPk){
         return ResponseEntity.ok(postService.getOnePost(postPk));
     }
 
     @GetMapping("/getPosts/{itemNum}/{pageIndex}")
-    public ResponseEntity<List<PostListResponseDto>> get10Post(@RequestParam(value="pageIndex", defaultValue="0") int index, @RequestParam(value="itemNum", defaultValue="10") int itemNum){
+    public ResponseEntity<List<PostListResponseDto>> get10Post(@PathVariable(value="pageIndex") int index, @PathVariable(value="itemNum") int itemNum){
         return ResponseEntity.ok(postService.getPostList(index, itemNum));
     }
     
-
+//--------------------
+    @GetMapping("/getSurvey/{surveyId}")
+    public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){
+        log.info("surveyId  in Post Controller : " +surveyId);
+        ResponseEntity<Object> result = postService.getSurvey(surveyId);
+        return result;
+    }
 
 }
