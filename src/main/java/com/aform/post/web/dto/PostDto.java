@@ -12,7 +12,7 @@ public class PostDto {
     public static class PostCreateRequestDto{
         String postTitle;
         String postDesc;
-        Long postSurvey;
+        String postSurvey;
         Long author;
     
         public Post toEntity(){
@@ -32,7 +32,7 @@ public class PostDto {
         Long postPk;
         String postTitle;
         String postDesc;
-        Long postSurvey;
+        String postSurvey;
         int postViews;
     
         @Builder

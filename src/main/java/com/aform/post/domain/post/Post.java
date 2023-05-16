@@ -39,13 +39,13 @@ public class Post extends BaseTimeEntity implements Serializable{
     private String postDesc;
 
     @Column(name = "post_survey")
-    private Long postSurvey; // 설문지의 pk만 저장하다, 내용 자체는 요청하는 방식
+    private String postSurvey; // 설문지의 pk만 저장하다, 내용 자체는 요청하는 방식
 
     @Column(name = "post_views")
     private int postViews;
 
     @Builder
-    public Post(Long postAuthor, String postTitle, String postDesc, Long postSurvey, int postViews){
+    public Post(Long postAuthor, String postTitle, String postDesc, String postSurvey, int postViews){
         this.postAuthor = postAuthor;
         this.postTitle = postTitle;
         this.postDesc = postDesc;
