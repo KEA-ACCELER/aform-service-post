@@ -11,7 +11,7 @@ import com.aform.post.web.dto.UserDto.GetUserResponseDto;
 
 @FeignClient(
     name = "authentication-service", 
-    url = "http://172.17.0.1:8080/app/user"
+    url = "${user.server.url}"
 )
 public interface AuthenticationServiceFromUser {
 
@@ -22,3 +22,4 @@ public interface AuthenticationServiceFromUser {
     @GetMapping(path="/info")
     public Optional<GetUserResponseDto> ifUserLogin(@RequestHeader("authorization") String jwt);
 }
+

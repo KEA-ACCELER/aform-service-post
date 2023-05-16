@@ -1,5 +1,7 @@
 package com.aform.post.web.dto;
 
+import com.aform.post.domain.category.Category;
+import com.aform.post.domain.post.Post;
 import com.aform.post.domain.post_category.PostCategory;
 
 import lombok.Builder;
@@ -13,14 +15,13 @@ public class PostCategoryDto {
     public static class PostCategoryCreateRequestDto {
         //category 정보
         private String categoryType;
-
         //postCategory 정보
         private Long postPk;
 
-        public PostCategory toEntity(Long categoryPk){
+        public PostCategory toEntity(Category category, Post post){
             return PostCategory.builder()
-                    .postCategoryCategory(categoryPk)
-                    .postCategoryPost(postPk)
+                    .postCategoryCategory(category)
+                    .postCategoryPost(post)
                     .build();
         }
     }
@@ -29,14 +30,14 @@ public class PostCategoryDto {
     @RequiredArgsConstructor
     public static class GetPostCategoryResponseDto {
         private Long postCategoryPk;
-        private Long postCategoryCategory;
-        private Long postCategoryPost;
+        private Category postCategoryCategory;
+        private Long postCategoryPostPk;
 
         @Builder
         public GetPostCategoryResponseDto(PostCategory postCategory){
             this.postCategoryPk = postCategory.getPostCategoryPk();
             this.postCategoryCategory = postCategory.getPostCategoryCategory();
-            this.postCategoryPost = postCategory.getPostCategoryPost();
+            this.postCategoryPostPk = postCategory.getPostCategoryPost().getPostPk();
         }
     }
 

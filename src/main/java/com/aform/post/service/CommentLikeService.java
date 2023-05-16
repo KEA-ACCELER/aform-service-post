@@ -3,6 +3,8 @@ package com.aform.post.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aform.post.domain.comment.Comment;
+import com.aform.post.domain.comment.CommentRepository;
 import com.aform.post.domain.comment_like.CommentLike;
 import com.aform.post.domain.comment_like.CommentLikeRepository;
 import com.aform.post.web.dto.CommentLikeDto.CommentLikeCreateRequestDto;
@@ -21,6 +23,9 @@ public class CommentLikeService {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    CommentRepository commentRepository;
+
     @Transactional
     public CommentLike createCommentLike(CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
         
@@ -36,7 +41,8 @@ public class CommentLikeService {
     }
 
     public CommentLike deleteCommentLike(Long commentPk, Long userPk) {
-        return commentLikeRepository.deleteByCommentLikeUserAndCommentLikeComment(userPk, commentPk);
+        Comment comment = commentRepository.findByCommentPk(commentPk);
+        return commentLikeRepository.deleteByCommentLikeUserAndCommentLikeComment(userPk, comment);
     }
 
 }

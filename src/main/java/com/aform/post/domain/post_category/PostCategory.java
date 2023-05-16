@@ -26,15 +26,15 @@ public class PostCategory extends BaseTimeEntity implements Serializable{
 
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     @JoinColumn(name = "post_category_post")
-    private Long postCategoryPost; // 카테고리가 속한 게시글
+    private Post postCategoryPost; // 카테고리가 속한 게시글
 
 
     @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
     @JoinColumn(name = "post_category_category")
-    private Long postCategoryCategory; // 카테고리가 속한 게시글
+    private Category postCategoryCategory; // 카테고리가 속한 게시글
  
     @Builder
-    public PostCategory(Long postCategoryPost, Long postCategoryCategory) {
+    public PostCategory(Post postCategoryPost, Category postCategoryCategory) {
         this.postCategoryPost = postCategoryPost;
         this.postCategoryCategory = postCategoryCategory;
     }

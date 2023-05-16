@@ -1,5 +1,6 @@
 package com.aform.post.web.dto;
 
+import com.aform.post.domain.comment.Comment;
 import com.aform.post.domain.comment_like.CommentLike;
 
 import lombok.Builder;
@@ -11,7 +12,7 @@ public class CommentLikeDto {
     @RequiredArgsConstructor
     public static class CommentLikeCreateRequestDto {
         private Long commentLikeUser;
-        private Long commentLikeComment;
+        private Comment commentLikeComment;
 
         public CommentLike toEntity() {
             return CommentLike.builder()

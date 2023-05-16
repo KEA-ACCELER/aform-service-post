@@ -4,10 +4,12 @@ import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import com.aform.post.domain.post.Post;
+
 public interface PostCategoryRepository extends JpaRepository<PostCategory, Long>{
 
-    List<PostCategory> findAllByPostPk(Long postPk);
+    List<PostCategory> findAllByPostCategoryPost(Post postPk);
 
-    void deleteByPostCategoryPk(Long postCategoryPk);
+    void deleteByPostCategoryPk(Long postCategory);
     
 }

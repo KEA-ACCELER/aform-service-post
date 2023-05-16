@@ -56,8 +56,7 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment updateCommentLikeCount(Long commentPk){
-        Comment comment = commentRepository.findByCommentPk(commentPk);
+    public Comment updateCommentLikeCount(Comment comment){
         comment.setCommentLike(comment.getCommentLike()+1);
         return commentRepository.save(comment);
     }
