@@ -27,8 +27,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Controller
-@RequestMapping("/app/post")
+@RestController
+@RequestMapping("/api/post")
 public class PostController {
 
     @Autowired
@@ -37,15 +37,15 @@ public class PostController {
     @Autowired
     private PostService postService;
 
-    @GetMapping("/user/info")
-    public ResponseEntity<Optional<GetUserResponseDto>> getUser(HttpServletRequest request){
-        return ResponseEntity.ok(feignService.getUserInfo(request));
-    }
+    // @GetMapping("/user/info")
+    // public ResponseEntity<Optional<GetUserResponseDto>> getUser(HttpServletRequest request){
+    //     return ResponseEntity.ok(feignService.getUserInfo(request));
+    // }
 
-    @GetMapping("/test")
-    public ResponseEntity<String> test(HttpServletRequest request){
-        return ResponseEntity.ok(feignService.test());
-    }
+    // @GetMapping("/test")
+    // public ResponseEntity<String> test(HttpServletRequest request){
+    //     return ResponseEntity.ok(feignService.test());
+    // }
 
     //--------------------post down--------------------
 
@@ -60,7 +60,7 @@ public class PostController {
         return ResponseEntity.ok("Deleted : "+postService.deletePost(postPk));
     }
 
-    @GetMapping("/get/{postPk}")
+    @GetMapping("/getPost/{postPk}")
     public ResponseEntity<PostResponseDto> getOnePost(@PathVariable("postPk") Long postPk){
         return ResponseEntity.ok(postService.getOnePost(postPk));
     }
@@ -71,7 +71,7 @@ public class PostController {
     }
     
 //--------------------
-    @GetMapping("/getSurvey/{surveyId}")
+    @GetMapping("/getSurveyContent/{surveyId}")
     public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){
         log.info("surveyId  in Post Controller : " +surveyId);
         ResponseEntity<Object> result = postService.getSurvey(surveyId);

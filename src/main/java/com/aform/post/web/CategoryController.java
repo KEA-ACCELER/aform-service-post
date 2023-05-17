@@ -13,13 +13,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aform.post.domain.category.Category;
 import com.aform.post.service.CategoryService;
 
 
-@Controller
-@RequestMapping("/app/category")
+@RestController
+@RequestMapping("/api/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;
@@ -30,13 +31,13 @@ public class CategoryController {
         
     }
 
-    @GetMapping("/getALl")
+    @GetMapping("/getAll")
     public ResponseEntity<List<Category>> getAllCategory(){
         return ResponseEntity.ok(categoryService.getAllCategory());
     }
 
-    @DeleteMapping("/delete/{pk}")
-    public ResponseEntity<Long> deleteCategory(@RequestParam(value="pk") Long categoryPk){
+    @DeleteMapping("/delete/{categoryPk}")
+    public ResponseEntity<Long> deleteCategory(@RequestParam(value="categoryPk") Long categoryPk){
         return ResponseEntity.ok(categoryService.deleteCategory(categoryPk));
     }
 }

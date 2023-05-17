@@ -9,13 +9,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aform.post.domain.comment_like.CommentLike;
 import com.aform.post.service.CommentLikeService;
 import com.aform.post.web.dto.CommentLikeDto.CommentLikeCreateRequestDto;
 
-@Controller
-@RequestMapping("/api/commentlike")
+@RestController
+@RequestMapping("/api/commentLike")
 public class CommentLikeController {
 
     @Autowired

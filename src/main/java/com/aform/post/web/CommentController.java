@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aform.post.domain.comment.Comment;
 import com.aform.post.service.CommentService;
 import com.aform.post.web.dto.CommentDto;
 
-@Controller
+@RestController
 @RequestMapping("/api/comment")
 public class CommentController {
     

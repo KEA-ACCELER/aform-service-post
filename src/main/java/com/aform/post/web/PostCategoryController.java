@@ -12,14 +12,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.aform.post.domain.post_category.PostCategory;
 import com.aform.post.service.PostCategoryService;
 import com.aform.post.web.dto.PostCategoryDto.GetPostCategoryResponseDto;
 import com.aform.post.web.dto.PostCategoryDto.PostCategoryCreateRequestDto;
 
-@Controller
-@RequestMapping("/api/postcategory")
+@RestController
+@RequestMapping("/api/postCategory")
 public class PostCategoryController {
 
     @Autowired
