@@ -70,6 +70,7 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostList(index, itemNum));
     }
     
+
 //--------------------
     @GetMapping("/getSurveyContent/{surveyId}")
     public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){

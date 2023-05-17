@@ -1,6 +1,7 @@
 package com.aform.post.domain.post;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 import org.springframework.stereotype.Component;
 
@@ -44,13 +45,21 @@ public class Post extends BaseTimeEntity implements Serializable{
     @Column(name = "post_views")
     private int postViews;
 
+    @Column(name = "post_start_date") //It is not same with createdDate, it could be not from now.
+    private LocalDateTime postStartDate;
+
+    @Column(name = "post_due_date")
+    private LocalDateTime postDueDate; 
+
     @Builder
-    public Post(Long postAuthor, String postTitle, String postDesc, String postSurvey, int postViews){
+    public Post(Long postAuthor, String postTitle, String postDesc, String postSurvey, int postViews, LocalDateTime postStartDate, LocalDateTime postDueDate){
         this.postAuthor = postAuthor;
         this.postTitle = postTitle;
         this.postDesc = postDesc;
         this.postSurvey = postSurvey;
         this.postViews = postViews;
+        this.postStartDate = postStartDate;
+        this.postDueDate = postDueDate;
     }
 
 

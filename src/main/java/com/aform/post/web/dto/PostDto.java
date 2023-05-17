@@ -1,5 +1,8 @@
 package com.aform.post.web.dto;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import com.aform.post.domain.post.Post;
 
 import lombok.Builder;
@@ -14,6 +17,8 @@ public class PostDto {
         String postDesc;
         String postSurvey;
         Long author;
+        LocalDateTime postStartDate;
+        LocalDateTime postDueDate;
     
         public Post toEntity(){
             return Post.builder()
@@ -22,6 +27,8 @@ public class PostDto {
                 .postSurvey(postSurvey)
                 .postAuthor(author)
                 .postViews(0) // initial value
+                .postStartDate(postStartDate)
+                .postDueDate(postDueDate)
                 .build();
         }
     }  
@@ -34,6 +41,8 @@ public class PostDto {
         String postDesc;
         String postSurvey;
         int postViews;
+        LocalDateTime postStartDate;
+        LocalDateTime postDueDate;
     
         @Builder
         public PostResponseDto(Post post){
@@ -42,6 +51,8 @@ public class PostDto {
             this.postDesc = post.getPostDesc();
             this.postSurvey = post.getPostSurvey();
             this.postViews = post.getPostViews();
+            this.postStartDate = post.getPostStartDate();
+            this.postDueDate = post.getPostDueDate();
         }
 
     }
@@ -52,12 +63,16 @@ public class PostDto {
         Long postPk;
         String postTitle;
         int postViews;
+        LocalDateTime postStartDate;
+        LocalDateTime postDueDate;  
 
         @Builder
         public PostListResponseDto(Post post){
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postViews = post.getPostViews();
+            this.postStartDate = post.getPostStartDate();
+            this.postDueDate = post.getPostDueDate();
         }
     }
 }
