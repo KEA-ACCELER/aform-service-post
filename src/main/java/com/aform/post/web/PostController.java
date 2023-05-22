@@ -70,6 +70,10 @@ public class PostController {
         return ResponseEntity.ok(postService.getPostList(index, itemNum));
     }
     
+    @GetMapping("/getUserPosts/{userPk}/{itemNum}/{pageIndex}")
+    public ResponseEntity<List<PostListResponseDto>> getUserPosts(@PathVariable(value="userPk") Long userPk, @PathVariable(value="pageIndex") int index, @PathVariable(value="itemNum") int itemNum){
+        return ResponseEntity.ok(postService.getUserPostList(userPk, index, itemNum));
+    }
 
 //--------------------
     @GetMapping("/getSurveyContent/{surveyId}")

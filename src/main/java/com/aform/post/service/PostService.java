@@ -60,11 +60,21 @@ public class PostService {
 
 
     }
+    
 //---------------------------------
     @Transactional
     public ResponseEntity<Object> getSurvey(String surveyId){
         if (surveyId == null) return ResponseEntity.badRequest().build();
         return getSurveys.getSurvey(surveyId);
     }
+////////////----------------------
+    public List<PostListResponseDto> getUserPostList(Long userPk, int index, int itemNum){
+        Pageable pageable = PageRequest.of(index, itemNum);
+        Page<Post> result =postRepository.findAllByPostAuthor(userPk, pageable); //페이징
+        return result.getContent()
+            .stream()
+            .map(post -> PostListResponseDto.builder().post(post).build())
+            .collect(Collectors.toList());
+    } 
 
 }
