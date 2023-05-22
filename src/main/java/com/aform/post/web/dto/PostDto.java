@@ -36,6 +36,7 @@ public class PostDto {
     @Getter
     @RequiredArgsConstructor
     public static class PostResponseDto{
+        Long postAuthor;
         Long postPk;
         String postTitle;
         String postDesc;
@@ -46,6 +47,7 @@ public class PostDto {
     
         @Builder
         public PostResponseDto(Post post){
+            this.postAuthor = post.getPostAuthor();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postDesc = post.getPostDesc();
@@ -60,6 +62,7 @@ public class PostDto {
     @Getter
     @RequiredArgsConstructor
     public static class PostListResponseDto{
+        Long postAuthor;
         Long postPk;
         String postTitle;
         int postViews;
@@ -68,6 +71,7 @@ public class PostDto {
 
         @Builder
         public PostListResponseDto(Post post){
+            this.postAuthor = post.getPostAuthor();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postViews = post.getPostViews();
