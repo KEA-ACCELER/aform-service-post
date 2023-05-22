@@ -68,6 +68,7 @@ public class PostService {
         return getSurveys.getSurvey(surveyId);
     }
 ////////////----------------------
+    @Transactional
     public List<PostListResponseDto> getUserPostList(Long userPk, int index, int itemNum){
         Pageable pageable = PageRequest.of(index, itemNum);
         Page<Post> result =postRepository.findAllByPostAuthor(userPk, pageable); //페이징
@@ -76,5 +77,7 @@ public class PostService {
             .map(post -> PostListResponseDto.builder().post(post).build())
             .collect(Collectors.toList());
     } 
+
+  
 
 }

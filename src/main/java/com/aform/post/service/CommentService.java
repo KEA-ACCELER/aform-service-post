@@ -60,4 +60,11 @@ public class CommentService {
         comment.setCommentLike(comment.getCommentLike()+1);
         return commentRepository.save(comment);
     }
+
+    @Transactional
+    public int getCommentCnt(Long postPk) {
+        Post post = postRepository.findByPostPk(postPk);
+        return commentRepository.findAllByCommentPost(post).size();
+    
+    }
 }

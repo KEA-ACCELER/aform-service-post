@@ -41,4 +41,9 @@ public class CommentController {
         Long i = commentService.deleteComment(commentPk);
         return ResponseEntity.status(HttpStatus.OK).body(i+ "번째 댓글 삭제");
     }
+
+    @GetMapping("/commentCnt/{postPk}")
+    public ResponseEntity<Integer> getCommentCnt(@PathVariable(value = "postPk") Long postPk) {
+        return ResponseEntity.status(HttpStatus.OK).body(commentService.getCommentCnt(postPk));
+    }
 }
