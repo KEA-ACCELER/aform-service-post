@@ -75,6 +75,11 @@ public class PostController {
         return ResponseEntity.ok(postService.getUserPostList(userPk, index, itemNum));
     }
 
+    @PostMapping("/updateViews/{postPk}")
+    public ResponseEntity<Post> updateViews(@PathVariable("postPk") Long postPk){
+        return ResponseEntity.ok(postService.updateViews(postPk));
+    }
+
 //--------------------
     @GetMapping("/getSurveyContent/{surveyId}")
     public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){

@@ -76,6 +76,14 @@ public class PostService {
             .stream()
             .map(post -> PostListResponseDto.builder().post(post).build())
             .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Post updateViews(Long postPk) {
+        Post post = postRepository.findByPostPk(postPk);
+        post.setPostViews(post.getPostViews()+1L);
+        return postRepository.save(post);
+        
     } 
 
   

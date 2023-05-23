@@ -18,9 +18,11 @@ import com.aform.post.web.dto.PostCategoryDto.PostCategoryCreateRequestDto;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class PostCategoryService {
     
     @Autowired  
@@ -37,7 +39,7 @@ public class PostCategoryService {
 
     @Transactional
     public PostCategory createPostCategory(PostCategoryCreateRequestDto postCategoryCreateRequestDto) {
-        /*
+          /*
          * Category 데이터를 찾아서
          * 
          * 새로운 카테고리면 추가하고
@@ -47,8 +49,8 @@ public class PostCategoryService {
          * postcategory에만 추가만
          *
          */
-        Category category = categoryService.createCategory(postCategoryCreateRequestDto.getCategoryType());
         Post post = postRepository.findByPostPk(postCategoryCreateRequestDto.getPostPk());
+        Category category = categoryService.createCategory(postCategoryCreateRequestDto.getCategoryType());
         if (category == null) { // 이미 존재하는 카테고리이면 연관관계만 가아서 추가
             Category existedCategory = categoryRepository.findByCategoryType(postCategoryCreateRequestDto.getCategoryType()).get();
             return postCategoryRepository.save(postCategoryCreateRequestDto.toEntity(existedCategory, post));
@@ -69,7 +71,6 @@ public class PostCategoryService {
 
     @Transactional
     public Long deletePostCategory(Long postCategoryPk){
-        
         postCategoryRepository.deleteByPostCategoryPk(postCategoryPk);
         return postCategoryPk;
     }

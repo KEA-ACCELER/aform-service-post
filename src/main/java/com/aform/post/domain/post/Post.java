@@ -16,6 +16,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Component
 @Table(name = "post")
@@ -42,8 +43,9 @@ public class Post extends BaseTimeEntity implements Serializable{
     @Column(name = "post_survey")
     private String postSurvey; // 설문지의 pk만 저장하다, 내용 자체는 요청하는 방식
 
+    @Setter
     @Column(name = "post_views")
-    private int postViews;
+    private Long postViews;
 
     @Column(name = "post_start_date") //It is not same with createdDate, it could be not from now.
     private LocalDateTime postStartDate;
@@ -52,7 +54,7 @@ public class Post extends BaseTimeEntity implements Serializable{
     private LocalDateTime postDueDate; 
 
     @Builder
-    public Post(Long postAuthor, String postTitle, String postDesc, String postSurvey, int postViews, LocalDateTime postStartDate, LocalDateTime postDueDate){
+    public Post(Long postAuthor, String postTitle, String postDesc, String postSurvey, Long postViews, LocalDateTime postStartDate, LocalDateTime postDueDate){
         this.postAuthor = postAuthor;
         this.postTitle = postTitle;
         this.postDesc = postDesc;

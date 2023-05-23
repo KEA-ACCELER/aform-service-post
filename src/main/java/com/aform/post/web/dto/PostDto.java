@@ -26,7 +26,7 @@ public class PostDto {
                 .postDesc(postDesc)
                 .postSurvey(postSurvey)
                 .postAuthor(author)
-                .postViews(0) // initial value
+                .postViews(0L) // initial value
                 .postStartDate(postStartDate)
                 .postDueDate(postDueDate)
                 .build();
@@ -41,7 +41,7 @@ public class PostDto {
         String postTitle;
         String postDesc;
         String postSurvey;
-        int postViews;
+        Long postViews;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;
     
@@ -65,7 +65,7 @@ public class PostDto {
         Long postAuthor;
         Long postPk;
         String postTitle;
-        int postViews;
+        Long postViews;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;  
 

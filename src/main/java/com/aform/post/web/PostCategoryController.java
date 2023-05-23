@@ -39,7 +39,7 @@ public class PostCategoryController {
     @DeleteMapping("/delete/{postCategoryPk}")
     public ResponseEntity<String> deletePostCategory(@PathVariable(value = "postCategoryPk") Long postCategoryPk){
         Long deletedItem = postCategoryService.deletePostCategory(postCategoryPk);
-        return ResponseEntity.status(HttpStatus.OK).body(deletedItem+" 번째 PostCategory가 삭제되었습니다.");
+        return ResponseEntity.status(HttpStatus.OK).body(deletedItem+" is deleted");
     }
     
 }
