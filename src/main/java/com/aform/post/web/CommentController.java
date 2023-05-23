@@ -43,7 +43,7 @@ public class CommentController {
     }
 
     @GetMapping("/commentCnt/{postPk}")
-    public ResponseEntity<Integer> getCommentCnt(@PathVariable(value = "postPk") Long postPk) {
-        return ResponseEntity.status(HttpStatus.OK).body(commentService.getCommentCnt(postPk));
+    public ResponseEntity<String> getCommentCnt(@PathVariable(value = "postPk") Long postPk) {
+        return ResponseEntity.status(HttpStatus.OK).body(commentService.getCommentCnt(postPk)+"");
     }
 }

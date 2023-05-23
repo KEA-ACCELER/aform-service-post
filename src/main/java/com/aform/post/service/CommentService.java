@@ -18,9 +18,11 @@ import com.aform.post.web.dto.CommentDto.CommentCreateRequestDto;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class CommentService {
 
     @Autowired
@@ -32,8 +34,9 @@ public class CommentService {
     @Transactional
 	public Comment createComment(CommentCreateRequestDto commentCreateRequestDto) {
 		Post post = postRepository.findByPostPk(commentCreateRequestDto.getCommentPost());
+        log.info("post"+ post);
         if(post == null){
-        new IllegalArgumentException("해당 게시글이 없습니다. id=" + commentCreateRequestDto.getCommentPost());
+        log.info("해당 게시글이 없습니다. id=" + commentCreateRequestDto.getCommentPost());
         }
         return commentRepository.save(commentCreateRequestDto.toEntity(post));
 	}
@@ -56,8 +59,10 @@ public class CommentService {
     }
 
     @Transactional
-    public Comment updateCommentLikeCount(Comment comment){
-        comment.setCommentLike(comment.getCommentLike()+1);
+    public Comment updateCommentLikeCount(Comment comment, Long num){
+        Long commentLike = comment.getCommentLike();
+        log.info("commentLike : "+ commentLike);
+        comment.setCommentLike(commentLike+num);
         return commentRepository.save(comment);
     }
 

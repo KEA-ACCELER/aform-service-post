@@ -27,22 +27,21 @@ public class CommentLikeService {
     CommentRepository commentRepository;
 
     @Transactional
-    public CommentLike createCommentLike(CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
+    public CommentLike createDeleteCommentLike(CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
+        Comment comment = commentRepository.findByCommentPk(commentLikeCreateRequestDto.getCommentPk());
+        //해당 댓글에 좋아요를 누른 유저인지 확인, 눌렀으면 싫어요로 바꾸고 댓글 좋아요 수 감요
         
-        //해당 댓글에 좋아요를 누른 유저인지 확인
-        if (commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), commentLikeCreateRequestDto.getCommentLikeComment()).isPresent()) {
-            log.info("이미 좋아요를 누른 유저입니다.");
-            return null;
+        if (commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), comment).isPresent()){
+            Comment result = commentService.updateCommentLikeCount(comment, -1L);
+            commentLikeRepository.deleteByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), comment);
+            return commentLikeRepository.save(commentLikeCreateRequestDto.toEntity(result));
         }
         // 댓글 좋아요 수 증가
-        commentService.updateCommentLikeCount(commentLikeCreateRequestDto.getCommentLikeComment());
-
-        return commentLikeRepository.save(commentLikeCreateRequestDto.toEntity());
+        else{
+            Comment result = commentService.updateCommentLikeCount(comment, 1L);
+            return commentLikeRepository.save(commentLikeCreateRequestDto.toEntity(result));
+        }
     }
 
-    public CommentLike deleteCommentLike(Long commentPk, Long userPk) {
-        Comment comment = commentRepository.findByCommentPk(commentPk);
-        return commentLikeRepository.deleteByCommentLikeUserAndCommentLikeComment(userPk, comment);
-    }
 
 }

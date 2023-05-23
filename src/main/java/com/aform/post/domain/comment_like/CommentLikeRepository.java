@@ -8,9 +8,9 @@ import com.aform.post.domain.comment.Comment;
 
 public interface CommentLikeRepository extends JpaRepository<CommentLike, Long> {
 
-    Optional<Comment> findByCommentLikeUserAndCommentLikeComment(Long commentLikeUser, Comment commentLikeComment);
+    Optional<CommentLike> findByCommentLikeUserAndCommentLikeComment(Long commentLikeUser, Comment commentLikeComment);
    //public boolean existsByCommentLikeUser(Long commentLikeUser); 
 
-    CommentLike deleteByCommentLikeUserAndCommentLikeComment(Long userPk, Comment comment);
+    void deleteByCommentLikeUserAndCommentLikeComment(Long userPk, Comment comment);
 
 }

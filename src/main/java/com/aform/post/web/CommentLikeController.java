@@ -22,14 +22,14 @@ public class CommentLikeController {
     @Autowired
     CommentLikeService commentLikeService;
     
-    @PostMapping("/create")
+    @PostMapping("/likeButtonClicked")
     public ResponseEntity<CommentLike> createCommentLike(@RequestBody CommentLikeCreateRequestDto commentLikeCreateRequestDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(commentLikeService.createCommentLike(commentLikeCreateRequestDto));
+        return ResponseEntity.status(HttpStatus.CREATED).body(commentLikeService.createDeleteCommentLike(commentLikeCreateRequestDto));
     }
 
-    @DeleteMapping("/delete/{commentPk}/{userPk}")
-    public ResponseEntity<CommentLike> deleteCommentLike(@PathVariable("commentPk") Long commentPk, @PathVariable("userPk") Long userPk){
-        return ResponseEntity.status(HttpStatus.OK).body(commentLikeService.deleteCommentLike(commentPk, userPk));
-    }
+    // @DeleteMapping("/delete/{commentPk}/{userPk}")
+    // public ResponseEntity<CommentLike> deleteCommentLike(@PathVariable("commentPk") Long commentPk, @PathVariable("userPk") Long userPk){
+    //     return ResponseEntity.status(HttpStatus.OK).body(commentLikeService.deleteCommentLike(commentPk, userPk));
+    // }
 
 }

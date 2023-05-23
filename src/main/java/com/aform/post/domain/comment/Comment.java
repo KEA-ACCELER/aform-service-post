@@ -6,6 +6,8 @@ import org.springframework.stereotype.Component;
 
 import com.aform.post.BaseTimeEntity;
 import com.aform.post.domain.post.Post;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -38,17 +40,18 @@ public class Comment extends BaseTimeEntity implements Serializable{
     @Column(name = "comment_content", length = 500)
     private String commentContent;
 
-    @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
+
+    @ManyToOne(fetch = jakarta.persistence.FetchType.EAGER)
     @JoinColumn(name = "comment_post")
     private Post commentPost;
 
     @Setter
     @Column(name = "comment_like")
-    private int commentLike;
+    private Long commentLike;
 
 
     @Builder
-    public Comment(Long commentAuthor, String commentContent, Post commentPost, int commentLike) {
+    public Comment(Long commentAuthor, String commentContent, Post commentPost, Long commentLike) {
         this.commentAuthor = commentAuthor;
         this.commentContent = commentContent;
         this.commentPost = commentPost;

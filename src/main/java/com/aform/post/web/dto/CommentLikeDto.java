@@ -12,12 +12,12 @@ public class CommentLikeDto {
     @RequiredArgsConstructor
     public static class CommentLikeCreateRequestDto {
         private Long commentLikeUser;
-        private Comment commentLikeComment;
+        private Long commentPk;
 
-        public CommentLike toEntity() {
+        public CommentLike toEntity(Comment comment) {
             return CommentLike.builder()
                     .commentLikeUser(commentLikeUser)
-                    .commentLikeComment(commentLikeComment)
+                    .commentLikeComment(comment)
                     .build();
         }
 

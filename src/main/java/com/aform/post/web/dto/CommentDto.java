@@ -25,7 +25,7 @@ public class CommentDto {
                     .commentAuthor(commentAuthor)
                     .commentContent(commentContent)
                     .commentPost(post)
-                    .commentLike(0) // Default value
+                    .commentLike(0L) // Default value
                     .build();
         }
     }
@@ -37,7 +37,7 @@ public class CommentDto {
         private Long commentPk;
         private Long commentAuthor;
         private String commentContent;
-        private int commentLike;
+        private Long commentLike;
         private LocalDateTime createdDate;
     
         @Builder
@@ -49,5 +49,16 @@ public class CommentDto {
             this.createdDate = entity.getCreatedDate();
         }
     }
-    
+    @Getter
+    @RequiredArgsConstructor
+    public static class UpdateCommentLikeRequestDto {
+        private Long commentPk;
+        private Long commentLike;
+
+        @Builder
+        public UpdateCommentLikeRequestDto(Comment entity) {
+            this.commentPk = entity.getCommentPk();
+            this.commentLike = entity.getCommentLike();
+        }
+    } 
 }

@@ -29,7 +29,7 @@ public class CommentLike extends BaseTimeEntity implements Serializable{
     @Column(name = "comment_like_user")
     private Long commentLikeUser; //좋아요 누른사람 정보저장
 
-    @ManyToOne(fetch = jakarta.persistence.FetchType.LAZY)
+    @ManyToOne(fetch = jakarta.persistence.FetchType.EAGER)
     @JoinColumn(name = "comment_like_comment")
     private Comment commentLikeComment; // 좋아요가 눌린 댓글
 
