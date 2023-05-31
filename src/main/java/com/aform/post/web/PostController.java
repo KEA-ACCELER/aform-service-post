@@ -80,12 +80,11 @@ public class PostController {
         return ResponseEntity.ok(postService.updateViews(postPk));
     }
 
-//--------------------
-    @GetMapping("/getSurveyContent/{surveyId}")
-    public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){
-        log.info("surveyId  in Post Controller : " +surveyId);
-        ResponseEntity<Object> result = postService.getSurvey(surveyId);
-        return result;
-    }
+    // @GetMapping("/getSurveyContent/{surveyId}")
+    // public ResponseEntity<Object> getSurvey(@PathVariable(value="surveyId") String surveyId){
+    //     log.info("surveyId  in Post Controller : " +surveyId);
+    //     ResponseEntity<Object> result = postService.getSurvey(surveyId);
+    //     return result;
+    // }
 
 }

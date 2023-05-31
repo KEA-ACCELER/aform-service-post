@@ -46,15 +46,15 @@ public class PostDto {
         LocalDateTime postDueDate;
     
         @Builder
-        public PostResponseDto(Post post){
+        public PostResponseDto(Post post, LocalDateTime postStartDate, LocalDateTime postDueDate){
             this.postAuthor = post.getPostAuthor();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postDesc = post.getPostDesc();
             this.postSurvey = post.getPostSurvey();
             this.postViews = post.getPostViews();
-            this.postStartDate = post.getPostStartDate();
-            this.postDueDate = post.getPostDueDate();
+            this.postStartDate = postStartDate;
+            this.postDueDate = postDueDate;
         }
 
     }
@@ -70,13 +70,13 @@ public class PostDto {
         LocalDateTime postDueDate;  
 
         @Builder
-        public PostListResponseDto(Post post){
+        public PostListResponseDto(Post post, LocalDateTime postStartDate, LocalDateTime postDueDate){
             this.postAuthor = post.getPostAuthor();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postViews = post.getPostViews();
-            this.postStartDate = post.getPostStartDate();
-            this.postDueDate = post.getPostDueDate();
+            this.postStartDate = postStartDate;
+            this.postDueDate = postDueDate;
         }
     }
 }

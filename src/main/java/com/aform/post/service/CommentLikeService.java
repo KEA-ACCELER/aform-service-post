@@ -76,7 +76,7 @@ public class CommentLikeService {
                     .build());
 
         }
-        log.info(commentLikeUserListItems.toString());
+        //log.info(commentLikeUserListItems.toString());
         return commentLikeUserListItems;
 
     }

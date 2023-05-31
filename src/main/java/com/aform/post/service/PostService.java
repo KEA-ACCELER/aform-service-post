@@ -17,10 +17,12 @@ import com.aform.post.feign.GetSurveys;
 import com.aform.post.web.dto.PostDto;
 import com.aform.post.web.dto.PostDto.PostListResponseDto;
 import com.aform.post.web.dto.SurveyDto.GetOneSurvey;
+import com.aform.post.utils.TimezoneConverter;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 
 @Service
 @RequiredArgsConstructor
@@ -46,7 +48,10 @@ public class PostService {
     @Transactional
     public PostDto.PostResponseDto getOnePost(Long postPk){
         Post post = postRepository.findByPostPk(postPk);
-        return PostDto.PostResponseDto.builder().post(post).build();
+        return PostDto.PostResponseDto.builder().post(post)
+                                                .postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate()))
+                                                .postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate()))
+                                                .build();
     }
 
     @Transactional
@@ -55,26 +60,33 @@ public class PostService {
         Page<Post> result =postRepository.findAll(pageable); //페이징
         return result.getContent()
             .stream()
-            .map(post -> PostListResponseDto.builder().post(post).build())
+            .map(post -> PostListResponseDto.builder()
+                                        .post(post).
+                                        postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate())).
+                                        postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate())).
+                                        build())
             .collect(Collectors.toList());
 
 
     }
     
-//---------------------------------
-    @Transactional
-    public ResponseEntity<Object> getSurvey(String surveyId){
-        if (surveyId == null) return ResponseEntity.badRequest().build();
-        return getSurveys.getSurvey(surveyId);
-    }
-////////////----------------------
+    // @Transactional
+    // public ResponseEntity<Object> getSurvey(String surveyId){
+    //     if (surveyId == null) return ResponseEntity.badRequest().build();
+    //     return getSurveys.getSurvey(surveyId);
+    // }
+
     @Transactional
     public List<PostListResponseDto> getUserPostList(Long userPk, int index, int itemNum){
         Pageable pageable = PageRequest.of(index, itemNum);
         Page<Post> result =postRepository.findAllByPostAuthor(userPk, pageable); //페이징
         return result.getContent()
             .stream()
-            .map(post -> PostListResponseDto.builder().post(post).build())
+            .map(post -> PostListResponseDto.builder().
+                                            post(post).
+                                            postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate())).
+                                            postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate())).
+                                            build())
             .collect(Collectors.toList());
     }
 
