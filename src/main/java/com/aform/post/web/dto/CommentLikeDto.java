@@ -1,5 +1,7 @@
 package com.aform.post.web.dto;
 
+import java.util.List;
+
 import com.aform.post.domain.comment.Comment;
 import com.aform.post.domain.comment_like.CommentLike;
 
@@ -17,7 +19,7 @@ public class CommentLikeDto {
         private Long commentPk;
 
         @Builder
-        public CommentLikeCreateRequestDto (Long commentLikeUser, Long commentPk){
+        public CommentLikeCreateRequestDto(Long commentLikeUser, Long commentPk) {
             this.commentLikeUser = commentLikeUser;
             this.commentPk = commentPk;
         }
@@ -30,5 +32,19 @@ public class CommentLikeDto {
         }
 
     }
-    
+
+    @Getter
+    @RequiredArgsConstructor
+    @ToString
+    public static class CommentLikeUserListItem {
+        private Long commentPk;
+        private List<Long> commentLikeUserList;
+
+        @Builder
+        public CommentLikeUserListItem(Long commentPk, List<Long> commentLikeUserList) {
+            this.commentPk = commentPk;
+            this.commentLikeUserList = commentLikeUserList;
+        }
+    }
+
 }
