@@ -15,21 +15,31 @@ import com.aform.post.domain.comment_like.CommentLike;
 import com.aform.post.service.CommentLikeService;
 import com.aform.post.web.dto.CommentLikeDto.CommentLikeCreateRequestDto;
 
+import lombok.extern.slf4j.Slf4j;
+
 @RestController
 @RequestMapping("/api/commentLike")
+@Slf4j
 public class CommentLikeController {
 
     @Autowired
     CommentLikeService commentLikeService;
-    
+
     @PostMapping("/likeButtonClicked")
-    public ResponseEntity<CommentLike> createCommentLike(@RequestBody CommentLikeCreateRequestDto commentLikeCreateRequestDto){
-        return ResponseEntity.status(HttpStatus.CREATED).body(commentLikeService.createDeleteCommentLike(commentLikeCreateRequestDto));
+    public ResponseEntity<CommentLike> createCommentLike(
+            @RequestBody CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
+        log.info(commentLikeCreateRequestDto.toString());
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(commentLikeService.createDeleteCommentLike(commentLikeCreateRequestDto));
     }
 
     // @DeleteMapping("/delete/{commentPk}/{userPk}")
-    // public ResponseEntity<CommentLike> deleteCommentLike(@PathVariable("commentPk") Long commentPk, @PathVariable("userPk") Long userPk){
-    //     return ResponseEntity.status(HttpStatus.OK).body(commentLikeService.deleteCommentLike(commentPk, userPk));
+    // public ResponseEntity<CommentLike>
+    // deleteCommentLike(@PathVariable("commentPk") Long commentPk,
+    // @PathVariable("userPk") Long userPk){
+    // return
+    // ResponseEntity.status(HttpStatus.OK).body(commentLikeService.deleteCommentLike(commentPk,
+    // userPk));
     // }
 
 }

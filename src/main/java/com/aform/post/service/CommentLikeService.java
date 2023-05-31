@@ -1,5 +1,7 @@
 package com.aform.post.service;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,17 +30,22 @@ public class CommentLikeService {
 
     @Transactional
     public CommentLike createDeleteCommentLike(CommentLikeCreateRequestDto commentLikeCreateRequestDto) {
+        log.info("commentLikeUser: "+ commentLikeCreateRequestDto.getCommentLikeUser());
+        log.info("commentPk: "+ commentLikeCreateRequestDto.getCommentPk());
+
         Comment comment = commentRepository.findByCommentPk(commentLikeCreateRequestDto.getCommentPk());
-        //해당 댓글에 좋아요를 누른 유저인지 확인, 눌렀으면 싫어요로 바꾸고 댓글 좋아요 수 감요
-        
-        if (commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), comment).isPresent()){
+        //log.info(comment.toString());
+        //해당 댓글에 좋아요를 누른 유저인지 확인, 눌렀으면 싫어요로 바꾸고 댓글 좋아요 수 감소
+        Optional<CommentLike> commentLike = commentLikeRepository.findByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), comment);
+        //log.info(commentLike.toString());
+        if (commentLike.isPresent()){
             Comment result = commentService.updateCommentLikeCount(comment, -1L);
-            commentLikeRepository.deleteByCommentLikeUserAndCommentLikeComment(commentLikeCreateRequestDto.getCommentLikeUser(), comment);
-            return commentLikeRepository.save(commentLikeCreateRequestDto.toEntity(result));
+            commentLikeRepository.delete(commentLike.get());
+            return null;
         }
         // 댓글 좋아요 수 증가
         else{
-            Comment result = commentService.updateCommentLikeCount(comment, 1L);
+            Comment result = commentService.updateCommentLikeCount(comment, +1L);
             return commentLikeRepository.save(commentLikeCreateRequestDto.toEntity(result));
         }
     }

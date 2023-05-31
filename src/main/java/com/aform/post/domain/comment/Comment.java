@@ -20,6 +20,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Component
@@ -27,6 +28,7 @@ import lombok.Setter;
 @NoArgsConstructor (access = lombok.AccessLevel.PROTECTED)
 @AllArgsConstructor
 @Getter
+@ToString
 public class Comment extends BaseTimeEntity implements Serializable{
 
     @Id

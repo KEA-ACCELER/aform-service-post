@@ -30,7 +30,9 @@ public class CommentService {
 
     @Autowired
     PostRepository postRepository;
-  
+ 
+    
+
     @Transactional
 	public Comment createComment(CommentCreateRequestDto commentCreateRequestDto) {
 		Post post = postRepository.findByPostPk(commentCreateRequestDto.getCommentPost());
@@ -63,7 +65,7 @@ public class CommentService {
         Long commentLike = comment.getCommentLike();
         log.info("commentLike : "+ commentLike);
         comment.setCommentLike(commentLike+num);
-        return commentRepository.save(comment);
+        return comment;
     }
 
     @Transactional
