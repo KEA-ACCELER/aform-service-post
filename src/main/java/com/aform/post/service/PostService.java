@@ -96,7 +96,13 @@ public class PostService {
         post.setPostViews(post.getPostViews()+1L);
         return postRepository.save(post);
         
-    } 
+    }
+
+    @Transactional
+	public Long getUserPostsCnt(Long userPk) {
+		List<Post> posts = postRepository.findAllByPostAuthor(userPk);
+        return (long) posts.size();
+	} 
 
   
 

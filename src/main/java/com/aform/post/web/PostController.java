@@ -86,5 +86,9 @@ public class PostController {
     //     ResponseEntity<Object> result = postService.getSurvey(surveyId);
     //     return result;
     // }
-
+    
+    @GetMapping("/getUserPostsCnt/{userPk}")
+    public ResponseEntity<Long> getUserPostsCnt(@PathVariable(value="userPk") Long userPk){
+        return ResponseEntity.ok(postService.getUserPostsCnt(userPk));
+    }
 }
