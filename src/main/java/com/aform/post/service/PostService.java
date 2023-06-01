@@ -1,5 +1,6 @@
 package com.aform.post.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -33,7 +34,7 @@ public class PostService {
 
     @Autowired
     GetSurveys getSurveys;
-    
+
     @Transactional
     public Post createPost(PostDto.PostCreateRequestDto postCreateRequestDto ){
         return postRepository.save(postCreateRequestDto.toEntity());
@@ -102,7 +103,17 @@ public class PostService {
 	public Long getUserPostsCnt(Long userPk) {
 		List<Post> posts = postRepository.findAllByPostAuthor(userPk);
         return (long) posts.size();
-	} 
+	}
+
+    // @Transactional
+    // public List<PostListResponseDto> getPopularPost(LocalDateTime localDateTime) {
+    //     if (localDateTime == null) return null;
+    //     String[] surveyPk = getSurveys.getPopularSurvey(localDateTime).getBody();
+    //     for 
+        
+
+    //     return null;
+    // } 
 
   
 

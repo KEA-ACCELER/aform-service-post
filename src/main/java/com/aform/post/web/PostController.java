@@ -1,6 +1,7 @@
 package com.aform.post.web;
 
 import java.net.http.HttpRequest;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,4 +92,9 @@ public class PostController {
     public ResponseEntity<Long> getUserPostsCnt(@PathVariable(value="userPk") Long userPk){
         return ResponseEntity.ok(postService.getUserPostsCnt(userPk));
     }
+
+    // @GetMapping("/getPopularPost")
+    // public ResponseEntity<List<PostListResponseDto>> getPopularPost(@RequestParam(value="localDateTime") LocalDateTime localDateTime){
+    //     return ResponseEntity.ok(postService.getPopularPost(localDateTime));
+    // }
 }

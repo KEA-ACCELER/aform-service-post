@@ -32,4 +32,5 @@ public class FeignService {
     public String test(){
             return authenticationServiceFromUser.test();
     }
+    
 }

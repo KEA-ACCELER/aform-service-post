@@ -17,6 +17,7 @@ public class PostDto {
         String postDesc;
         String postSurvey;
         Long author;
+        String authorId;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;
     
@@ -26,6 +27,7 @@ public class PostDto {
                 .postDesc(postDesc)
                 .postSurvey(postSurvey)
                 .postAuthor(author)
+                .postAuthorId(authorId)
                 .postViews(0L) // initial value
                 .postStartDate(postStartDate)
                 .postDueDate(postDueDate)
@@ -37,6 +39,7 @@ public class PostDto {
     @RequiredArgsConstructor
     public static class PostResponseDto{
         Long postAuthor;
+        String postAuthorId;
         Long postPk;
         String postTitle;
         String postDesc;
@@ -48,6 +51,7 @@ public class PostDto {
         @Builder
         public PostResponseDto(Post post, LocalDateTime postStartDate, LocalDateTime postDueDate){
             this.postAuthor = post.getPostAuthor();
+            this.postAuthorId = post.getPostAuthorId();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postDesc = post.getPostDesc();
@@ -63,6 +67,7 @@ public class PostDto {
     @RequiredArgsConstructor
     public static class PostListResponseDto{
         Long postAuthor;
+        String postAuthorId;
         Long postPk;
         String postTitle;
         Long postViews;
@@ -72,6 +77,7 @@ public class PostDto {
         @Builder
         public PostListResponseDto(Post post, LocalDateTime postStartDate, LocalDateTime postDueDate){
             this.postAuthor = post.getPostAuthor();
+            this.postAuthorId = post.getPostAuthorId();
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postViews = post.getPostViews();
