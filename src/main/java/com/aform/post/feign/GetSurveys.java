@@ -23,5 +23,6 @@ public interface GetSurveys {
     public ResponseEntity<Object> getSurvey(@PathVariable(value="_id") String surveyId);
 
     @GetMapping(path="/popular")
-    public ResponseEntity<String[]> getPopularSurvey(@RequestParam(value="date") LocalDateTime date );   
+    public ResponseEntity<String[]> getPopularSurvey(@RequestParam(value="date") String date , 
+                                        @RequestParam(value="type") String id);   
 }

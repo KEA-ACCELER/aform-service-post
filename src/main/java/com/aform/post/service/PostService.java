@@ -1,6 +1,8 @@
 package com.aform.post.service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -105,15 +107,37 @@ public class PostService {
         return (long) posts.size();
 	}
 
-    // @Transactional
-    // public List<PostListResponseDto> getPopularPost(LocalDateTime localDateTime) {
-    //     if (localDateTime == null) return null;
-    //     String[] surveyPk = getSurveys.getPopularSurvey(localDateTime).getBody();
-    //     for 
+    @Transactional
+    public List<PostListResponseDto> getPopularPost(LocalDateTime localDateTime) {
+        if (localDateTime == null) return null;
+        log.info("localDateTime : "+localDateTime.toString());
+        if (getSurveys.getPopularSurvey(localDateTime.toString(), "id").getBody() == null) return null;
+        String[] surveyPks = getSurveys.getPopularSurvey(localDateTime.toString(), "id").getBody();
+        log.info("surveyPks : "+Arrays.toString(surveyPks));
+        if(surveyPks.length == 0) return null;
+        log.info("surveyPks : "+surveyPks[0]);
+        List<Post> candidatePosts = new ArrayList<>();
         
+        for (String surveyPk : surveyPks) {
+            Optional<List<Post>> item = postRepository.findAllByPostSurvey(surveyPk);
+            if (item.isPresent()){
+                {
+                    candidatePosts.add(item.get().get(0));
+                }
+            }
+        }
+        log.info(candidatePosts.toString());
 
-    //     return null;
-    // } 
+        List<PostListResponseDto> result = candidatePosts.stream()
+            .map(post -> PostListResponseDto.builder().
+                                            post(post).
+                                            postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate())).
+                                            postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate())).
+                                            build())
+            .collect(Collectors.toList());
+        
+        return result;
+    } 
 
   
 

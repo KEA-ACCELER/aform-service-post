@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -93,8 +95,8 @@ public class PostController {
         return ResponseEntity.ok(postService.getUserPostsCnt(userPk));
     }
 
-    // @GetMapping("/getPopularPost")
-    // public ResponseEntity<List<PostListResponseDto>> getPopularPost(@RequestParam(value="localDateTime") LocalDateTime localDateTime){
-    //     return ResponseEntity.ok(postService.getPopularPost(localDateTime));
-    // }
+    @GetMapping("/getPopularPost")
+    public ResponseEntity<List<PostListResponseDto>> getPopularPost(@RequestParam(value="localDateTime") @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime localDateTime){
+        return ResponseEntity.ok(postService.getPopularPost(localDateTime));
+    }
 }
