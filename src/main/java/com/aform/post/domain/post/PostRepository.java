@@ -20,7 +20,7 @@ public interface PostRepository extends JpaRepository<Post, Long>{
 
     public List<Post> findAllByPostAuthor(Long userPk);
 
-    public Optional<List<Post>> findAllByPostSurvey(String postSurvey);
+    public Optional<Post> findFirstByPostSurvey(String surveyPk);
 
     public List<Post> findAllByPostSurveyType(String string);
 

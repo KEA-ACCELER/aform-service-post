@@ -125,14 +125,16 @@ public class PostService {
         List<Post> candidatePosts = new ArrayList<>();
         
         for (String surveyPk : surveyPks) {
-            Optional<List<Post>> item = postRepository.findAllByPostSurvey(surveyPk);
+            System.out.println("surveyPk in loop:"+surveyPk);
+
+            Optional<Post> item = postRepository.findFirstByPostSurvey(surveyPk);
             if (item.isPresent()){
                 {
-                    candidatePosts.add(item.get().get(0));
+                    candidatePosts.add(item.get());
                 }
             }
         }
-        log.info(candidatePosts.toString());
+        log.info("candidatePost : "+candidatePosts.toString());
 
         List<PostListResponseDto> result = candidatePosts.stream()
             .map(post -> PostListResponseDto.builder().
