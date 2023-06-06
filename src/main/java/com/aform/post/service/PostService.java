@@ -137,6 +137,30 @@ public class PostService {
             .collect(Collectors.toList());
         
         return result;
+    }
+
+    @Transactional
+    public List<PostListResponseDto> getABposts() {
+        return postRepository.findAllByPostSurveyType("AB")
+            .stream()
+            .map(post -> PostListResponseDto.builder().
+                                            post(post).
+                                            postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate())).
+                                            postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate())).
+                                            build())
+            .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<PostListResponseDto> getNORMALposts() {
+        return postRepository.findAllByPostSurveyType("NORMAL")
+            .stream()
+            .map(post -> PostListResponseDto.builder().
+                                            post(post).
+                                            postStartDate(TimezoneConverter.UTC2KST(post.getPostStartDate())).
+                                            postDueDate(TimezoneConverter.UTC2KST(post.getPostDueDate())).
+                                            build())
+            .collect(Collectors.toList());
     } 
 
   

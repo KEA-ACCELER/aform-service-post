@@ -1,11 +1,14 @@
 package com.aform.post.domain.post;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+
+import com.aform.post.web.dto.PostDto.PostListResponseDto;
 
 public interface PostRepository extends JpaRepository<Post, Long>{
     
@@ -18,5 +21,9 @@ public interface PostRepository extends JpaRepository<Post, Long>{
     public List<Post> findAllByPostAuthor(Long userPk);
 
     public Optional<List<Post>> findAllByPostSurvey(String postSurvey);
+
+    public List<Post> findAllByPostSurveyType(String string);
+
+    
 
 }

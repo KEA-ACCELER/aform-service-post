@@ -20,6 +20,7 @@ public class PostDto {
         String authorId;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;
+        String postSurveyType;
     
         public Post toEntity(){
             return Post.builder()
@@ -31,6 +32,7 @@ public class PostDto {
                 .postViews(0L) // initial value
                 .postStartDate(postStartDate)
                 .postDueDate(postDueDate)
+                .postSurveyType(postSurveyType)
                 .build();
         }
     }  
@@ -47,6 +49,7 @@ public class PostDto {
         Long postViews;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;
+        String postSurveyType;
     
         @Builder
         public PostResponseDto(Post post, LocalDateTime postStartDate, LocalDateTime postDueDate){
@@ -57,6 +60,7 @@ public class PostDto {
             this.postDesc = post.getPostDesc();
             this.postSurvey = post.getPostSurvey();
             this.postViews = post.getPostViews();
+            this.postSurveyType = post.getPostSurveyType();
             this.postStartDate = postStartDate;
             this.postDueDate = postDueDate;
         }
@@ -71,6 +75,7 @@ public class PostDto {
         Long postPk;
         String postTitle;
         Long postViews;
+        String postSurveyType;
         LocalDateTime postStartDate;
         LocalDateTime postDueDate;  
 
@@ -81,6 +86,7 @@ public class PostDto {
             this.postPk = post.getPostPk();
             this.postTitle = post.getPostTitle();
             this.postViews = post.getPostViews();
+            this.postSurveyType = post.getPostSurveyType();
             this.postStartDate = postStartDate;
             this.postDueDate = postDueDate;
         }

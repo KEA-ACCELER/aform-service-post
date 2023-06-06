@@ -46,6 +46,9 @@ public class Post extends BaseTimeEntity implements Serializable{
     @Column(name = "post_survey")
     private String postSurvey; // 설문지의 pk만 저장하다, 내용 자체는 요청하는 방식
 
+    @Column(name ="post_survey_type")
+    private String postSurveyType; // 설문지의 타입
+
     @Setter
     @Column(name = "post_views")
     private Long postViews;
@@ -57,7 +60,7 @@ public class Post extends BaseTimeEntity implements Serializable{
     private LocalDateTime postDueDate; 
 
     @Builder
-    public Post(Long postAuthor, String postAuthorId, String postTitle, String postDesc, String postSurvey, Long postViews, LocalDateTime postStartDate, LocalDateTime postDueDate){
+    public Post(Long postAuthor, String postAuthorId, String postTitle, String postDesc, String postSurveyType, String postSurvey, Long postViews, LocalDateTime postStartDate, LocalDateTime postDueDate){
         this.postAuthor = postAuthor;
         this.postAuthorId = postAuthorId;
         this.postTitle = postTitle;
@@ -66,6 +69,7 @@ public class Post extends BaseTimeEntity implements Serializable{
         this.postViews = postViews;
         this.postStartDate = postStartDate;
         this.postDueDate = postDueDate;
+        this.postSurveyType = postSurveyType;
     }
 
 
