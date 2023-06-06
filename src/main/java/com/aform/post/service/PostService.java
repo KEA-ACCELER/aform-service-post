@@ -1,6 +1,9 @@
 package com.aform.post.service;
 
 import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -108,8 +111,11 @@ public class PostService {
 	}
 
     @Transactional
-    public List<PostListResponseDto> getPopularPost(LocalDateTime localDateTime) {
-        if (localDateTime == null) return null;
+    public List<PostListResponseDto> getPopularPost() {
+        LocalDateTime localDateTime = LocalDateTime.now();
+        localDateTime.atOffset(ZoneOffset.of("+09:00"));
+        //9시간 더하기
+        // localDateTime = localDateTime.plusHours(9);
         log.info("localDateTime : "+localDateTime.toString());
         if (getSurveys.getPopularSurvey(localDateTime.toString(), "id").getBody() == null) return null;
         String[] surveyPks = getSurveys.getPopularSurvey(localDateTime.toString(), "id").getBody();

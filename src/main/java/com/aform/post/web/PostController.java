@@ -99,8 +99,8 @@ public class PostController {
     }
 
     @GetMapping("/getPopularPost")
-    public ResponseEntity<List<PostListResponseDto>> getPopularPost(@RequestParam(value="localDateTime") @DateTimeFormat(iso = ISO.DATE_TIME) LocalDateTime localDateTime){
-        return ResponseEntity.ok(postService.getPopularPost(localDateTime));
+    public ResponseEntity<List<PostListResponseDto>> getPopularPost(){
+        return ResponseEntity.ok(postService.getPopularPost());
     }
 
     @GetMapping("/getABposts")
