@@ -21,7 +21,7 @@ import com.aform.post.service.CategoryService;
 
 
 @RestController
-@RequestMapping("/api/category")
+@RequestMapping("/api/post/category")
 public class CategoryController {
     @Autowired
     CategoryService categoryService;

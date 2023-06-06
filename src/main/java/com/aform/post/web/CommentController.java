@@ -20,7 +20,7 @@ import com.aform.post.service.CommentService;
 import com.aform.post.web.dto.CommentDto;
 
 @RestController
-@RequestMapping("/api/comment")
+@RequestMapping("/api/post/comment")
 public class CommentController {
     
     @Autowired

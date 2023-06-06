@@ -20,7 +20,7 @@ import com.aform.post.web.dto.PostCategoryDto.GetPostCategoryResponseDto;
 import com.aform.post.web.dto.PostCategoryDto.PostCategoryCreateRequestDto;
 
 @RestController
-@RequestMapping("/api/postCategory")
+@RequestMapping("/api/post/postCategory")
 public class PostCategoryController {
 
     @Autowired

@@ -22,7 +22,7 @@ import com.aform.post.web.dto.CommentLikeDto.CommentLikeUserListItem;
 import lombok.extern.slf4j.Slf4j;
 
 @RestController
-@RequestMapping("/api/commentLike")
+@RequestMapping("/api/post/commentLike")
 @Slf4j
 public class CommentLikeController {
 
